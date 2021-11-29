@@ -10,15 +10,16 @@ export class HttpService {
   constructor(private _http: HttpClient) { 
     // this.getTasks();
     // this.getTask();
-    this.getPokemon()
+    // this.getPokemon()
   }
 
   getTasks(){
-    // our http response is an Observable, store it in a variable
-    let tempObservable = this._http.get('http://localhost:8181');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
- }
+    // Remove the lines of code where we make the variable 'tempObservable' and subscribe to it.
+    // tempObservable = this._http.get('/tasks');
+    // tempObservable.subscribe(data => console.log("Got our tasks!", data));
+    // Return the observable to wherever the getTasks method was invoked.
+    return this._http.get('http://localhost:8181/');
+  }
 
  getTask(){
    let tempObservable = this._http.get('http://localhost:8181/Learn Angular');
@@ -31,7 +32,7 @@ export class HttpService {
       const {name, abilities}  = data
       const ditto = {name, abilities}
       console.log(`Got our Pokemon!,name: ${name},abilities: ${abilities[0].ability.name}, ${abilities[1].ability.name}` )
-      
+
       abilities.forEach( (ability:any) => {
         this.getPokemonWithSameAbility(ability.ability.url)
         
