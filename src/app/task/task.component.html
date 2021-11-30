@@ -1,5 +1,5 @@
 <div>
   <p>Title: {{title}}</p>
-  <p>Description: {{description}}</p>
-  <p>completed: {{completed}}</p>
+  <p *ngIf="description" class="description">Description: {{description}}</p>
+  <p *ngIf="description">completed: {{completed}}</p>
 </div>

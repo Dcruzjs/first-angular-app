@@ -21,30 +21,36 @@ export class HttpService {
     return this._http.get('http://localhost:8181/');
   }
 
- getTask(){
-   let tempObservable = this._http.get('http://localhost:8181/Learn Angular');
-   tempObservable.subscribe(data => console.log("Got our tasks!", data));
+  createTask(task:any){
+    // use the .post() method of HttpClient
+    // num must be an object
+    // provide the url of your post route - make sure this is set up in your server!
+    return this._http.post('/tasks', task);  
+  }
+
+  getTask(task:string){
+   return this._http.get(`http://localhost:8181/${task}`);
  }
 
- getPokemon(){
-    let tempObservable = this._http.get('https://pokeapi.co/api/v2/pokemon/ditto');
-    tempObservable.subscribe((data:any) => {
-      const {name, abilities}  = data
-      const ditto = {name, abilities}
-      console.log(`Got our Pokemon!,name: ${name},abilities: ${abilities[0].ability.name}, ${abilities[1].ability.name}` )
+//  getPokemon(){
+//     let tempObservable = this._http.get('https://pokeapi.co/api/v2/pokemon/ditto');
+//     tempObservable.subscribe((data:any) => {
+//       const {name, abilities}  = data
+//       const ditto = {name, abilities}
+//       console.log(`Got our Pokemon!,name: ${name},abilities: ${abilities[0].ability.name}, ${abilities[1].ability.name}` )
 
-      abilities.forEach( (ability:any) => {
-        this.getPokemonWithSameAbility(ability.ability.url)
+//       abilities.forEach( (ability:any) => {
+//         this.getPokemonWithSameAbility(ability.ability.url)
         
-      });
-    });
- }
+//       });
+//     });
+//  }
 
- getPokemonWithSameAbility(ability:string){
+//  getPokemonWithSameAbility(ability:string){
    
-    let tempObservable = this._http.get(`${ability}`);
-    tempObservable.subscribe((data:any) => console.log(data.pokemon))
- }
+//     let tempObservable = this._http.get(`${ability}`);
+//     tempObservable.subscribe((data:any) => console.log(data.pokemon))
+//  }
 
 
 }
